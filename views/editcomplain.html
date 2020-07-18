@@ -1,0 +1,142 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        #myButtonSubmit {
+            width: 20vw;
+            margin-left: 1.2em;
+            margin-top: 1.2em;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        body {
+            background-color: #f7ede2;
+            margin-top: 8em;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="text-center">Complain Resolves Page</h3><br>
+    <div class="container">
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="id" class="col-sm-2 col-form-label"><b>ID</b></label>
+            <div class="col-sm-10">
+                <input type="text" name="id" class="form-control" id="id" disabled>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label"><b>Title</b></label>
+            <div class="col-sm-10">
+                <input type="title" name="id" class="form-control" id="title" disabled>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label"><b>Description</b></label>
+            <div class="col-sm-10">
+                <textarea name="description" class="form-control" id="description" rows="3" disabled></textarea>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="status" class="col-sm-2 col-form-label"><b>Status</b></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="status">
+                    <option value="Solved">Solved</option>
+                    <option value="Delayed">Delayed</option>
+                    <option value="Unsolved">Unsolved</option>
+                </select>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="row justify-content-md-center">
+            <button id="myButtonSubmit" class="btn btn-success" type="submit">Submit</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+
+        // generating ID
+        // Read a page's GET URL variables and return them as an associative array.
+        function getUrlVars() {
+            var vars = [],
+                hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        var passedId = getUrlVars()["id"];
+        $('#id').val(passedId);
+
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost/final_project/api/complains/${passedId}`,
+            dataType: 'json',
+            success: function (data, status) {
+                $('#id').val(data.complainID),
+                $('#title').val(data.title),
+                $('#description').val(data.description),
+                $('#status').val(data.status)
+            },
+            error: function (status) {
+                alert(status);
+            }
+        });
+
+        $('#myButtonSubmit').click(function () {
+            let formData = {
+                id: $('#id').val(),
+                title: $('#title').val(),
+                description: $('#description').val(),
+                status: $('#status').val()
+            };
+            console.log(formData);
+            if (formData) {
+                $.ajax({
+                    type: 'PUT',
+                    url: `http://localhost/final_project/api/complains/${passedId}`,
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    success: function (data, status) {
+                        console.log('Dhukse');
+                        if (data.status == "success") {
+                            window.location.href = './viewComplain.html';
+                            // console.log('Successfull');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to connect');
+                    }
+                });
+            }
+        });
+    });
+</script>

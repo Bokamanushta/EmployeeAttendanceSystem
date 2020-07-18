@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Smart Attendace System</title>
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        #myButton,
+        #myButtonSubmit {
+            width: 20vw;
+            margin-left: 1.2em;
+            margin-top: 1.2em;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .container-fluid {
+            background-color: whitesmoke;
+            border-radius: 25px;
+            padding: 20px;
+            margin: auto;
+            width: 50vw;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        body {
+            background-color: #e76f51;
+            margin-top: 8em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center min-vh-100">
+        <div class="container-fluid">
+            <div class="container myHeader">
+                <h4 class="text-center"><b>Register Employee</b></h4>
+            </div>
+            <!-- <form action="../controllers/registerEmployeeController.php" method="POST" enctype="multipart/form-data"> -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="employeeID">Employee ID</label>
+                    <input type="text" class="form-control" id="employeeID" disabled>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="rfid">RFID No</label>
+                    <input type="text" class="form-control" id="rfid">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" class="form-control" id="phone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="ic">IC No</label>
+                    <input type="text" class="form-control" id="ic">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="departmentID">Department</label>
+                    <select class="form-control" id="departmentID">
+                        <option value="-">-</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Position</label>
+                    <select class="form-control" id="positions">
+                        <option value="-">-</option>
+                    </select>
+                </div>
+            </div>
+            <!-- .**. -->
+            <!-- <br>
+            <div class="form-group row">
+                <label for="picture" class="col-sm-2 col-form-label">Picture</label>
+                <div class="btn btn-mdb-color btn-rounded">
+                    <span>Choose file</span>
+                    <input type="file" id="picture">
+                </div>
+                <div class="col-sm-2">
+                    <img src="" class="img-thumbnail" id="imagePlacer" width="120" height="120" alt="no photo">
+                </div>
+            </div> -->
+            <!-- .**. -->
+            <br>
+            <div class="form-row text-center">
+                <div class="form-group col-md-12">
+                    <button type="submit" id="myButtonSubmit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+
+        // generating ID
+        function generateAdminID() {
+            let date = new Date();
+            return `EM${Math.floor(Math.random() * (999 - 1) + 1)}P${date.getMilliseconds()}`;
+        }
+        let id = generateAdminID;
+        $('#employeeID').val(id);
+
+        // this will preview the imgae that has been uploaded in the website
+        // function readURL(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+        //         reader.onload = (e) => $('#imagePlacer').attr('src', e.target.result);
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
+        // $("#picture").change(function () {
+        //     readURL(this);
+        // });
+
+
+        // this will make the ajax call 
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost/final_project/api/departments',
+            dataType: 'json',
+            success: function (data, status) {
+                for (var i = 0; i < data.length; i++)
+                    $('#departmentID').append(
+                        `<option value="${data[i].name}"> ${data[i].name} </option>`);
+            },
+            error: function (status) {
+                alert(status);
+            }
+        });
+
+        // getting the positions based on the Department
+        $('#departmentID').change(function () {
+            let department = $('#departmentID').val();
+            $('#positions option:not(:first)').remove();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost/final_project/api/positions/${department}`,
+                dataType: 'json',
+                success: function (data, status) {
+                    for (var i = 0; i < data.length; i++)
+                        $('#positions').append(
+                            `<option value="${data[i].name}"> ${data[i].name} </option>`);
+                },
+                error: function (status) {
+                    console.log(status);
+                }
+            });
+        });
+
+        // this will make the ajax call 
+        $('#myButtonSubmit').click(function () {
+            let formData = {
+                id: $('#employeeID').val(),
+                name: $('#name').val(),
+                email: $('#email').val(),
+                rfid: $('#rfid').val(),
+                dob: $('#dob').val(),
+                phone: $('#phone').val(),
+                ic: $('#ic').val(),
+                dept: $('#departmentID').val(),
+                pos: $('#positions').val(),
+            };
+            console.log(formData);
+            if (formData) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/final_project/api/employee',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data, status) {
+                        console.log('Dhukse');
+                        if (data.status == "success") {
+                            window.location.href = './dashboard.html';
+                            // console.log('Successfull');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to connect');
+                    }
+                });
+            }
+        });
+    });
+</script>

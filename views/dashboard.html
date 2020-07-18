@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Raleway", sans-serif
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<body class="w3-light-grey">
+
+    <!-- Top container -->
+    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+            onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
+        <span class="w3-bar-item w3-right"><i class="fa fa-bank fa-fw"></i>&nbsp;&nbsp;&nbsp;<b>Employee Management
+                System</b></span>
+    </div>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+        <div class="w3-container w3-row">
+            <div class="w3-col s8 w3-bar">
+                <span>Welcome, <strong id="name">Mike</strong></span><br>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+                <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+            </div>
+        </div>
+        <hr>
+        <div class="w3-container">
+            <h5>Dashboard</h5>
+        </div>
+        <div class="w3-bar-block">
+            <a href="./dashboard.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> Overview</a>
+            <a href="./employeeDetails.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>
+                View All Employee</a>
+            <a href="./leesPayment.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> Less Payment Page</a>
+            <a href="./viewDepartments.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i> Departments</a>
+            <a href="./hallofFame.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> Hall Of Fame</a>
+            <a href="./todaysAttendacen.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Todays Attendace</a>
+            <a href="./emplyeeRegistration.html" class="w3-bar-item w3-button w3-padding"><i
+                    class="fa fa-user-plus fa-fw"></i> Register
+                Staff</a>
+            <a href="./viewComplain.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i> Complains</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Set Working
+                Days</a>
+            <a href="./adminLogin.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>
+                Logout</a><br><br>
+            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+                onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
+        </div>
+    </nav>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+        <!-- Header -->
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> Admin Dashboard</b></h5>
+        </header>
+
+        <div class="w3-row-padding w3-margin-bottom">
+            <div class="w3-quarter w3-animate-zoom">
+                <div class="w3-container w3-card w3-red w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3 id="complainNotification">18</h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Complains</h4>
+                </div>
+            </div>
+            <div class="w3-quarter w3-animate-zoom">
+                <div class="w3-container w3-card w3-blue w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3 id="employeeNumber">99</h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Employees</h4>
+                </div>
+            </div>
+            <div class="w3-quarter w3-animate-zoom">
+                <div class="w3-container w3-card w3-teal w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-free-code-camp w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3 id="departmentNotification">23</h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Departments</h4>
+                </div>
+            </div>
+            <div class="w3-quarter w3-animate-zoom">
+                <div class="w3-container w3-orange w3-text-white w3-card w3-padding-16">
+                    <div class="w3-left"><i class="fa fa-user w3-xxxlarge"></i></div>
+                    <div class="w3-right">
+                        <h3 id="adminNumber">2</h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    <h4>Admins</h4>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="w3-container">
+            <h5>Todays Stats</h5>
+            <p>Attendace Percentange</p>
+            <div class="w3-grey">
+                <div class="w3-container w3-center w3-padding w3-green" id="present"></div>
+            </div>
+
+            <p>Absent Percentage</p>
+            <div class="w3-grey">
+                <div class="w3-container w3-center w3-padding w3-red" id="absent"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="w3-container w3-card-4 w3-white w3-margin">
+            <canvas id="myChart"></canvas>
+        </div>
+        <hr>
+        <div class="w3-container">
+            <h5>Recent Absents</h5>
+            <ul class="w3-ul w3-card-4 w3-white" id="absentsNames">
+
+            </ul>
+        </div>
+        <hr>
+
+        <div class="w3-container" id="complainsLa">
+            <h5>Recent Complains</h5>
+            <!-- <div class="w3-row">
+                <div class="w3-col m10 w3-container">
+                    <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
+                    <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-col m10 w3-container">
+                    <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
+                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+                </div>
+            </div> -->
+        </div>
+        <br>
+        <div class="w3-container w3-dark-grey w3-padding-32">
+            <div class="w3-row">
+                <div class="w3-container w3-third">
+                    <h5 class="w3-bottombar w3-border-green">Demographic</h5>
+                    <p>Language</p>
+                    <p>Country</p>
+                    <p>City</p>
+                </div>
+                <div class="w3-container w3-third">
+                    <h5 class="w3-bottombar w3-border-red">System</h5>
+                    <p>Browser</p>
+                    <p>OS</p>
+                    <p>More</p>
+                </div>
+                <div class="w3-container w3-third">
+                    <h5 class="w3-bottombar w3-border-orange">Target</h5>
+                    <p>Users</p>
+                    <p>Active</p>
+                    <p>Geo</p>
+                    <p>Interests</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- End page content -->
+    </div>
+
+
+    <!-- JQuery files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <!-- JQuery files -->
+    <script>
+        var Larray = ['Developer', 'Programmer', 'Manager', 'HR', 'Security'];
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost/final_project/api/dashboard`,
+                dataType: 'json',
+                success: function (data, status) {
+                    $('#complainNotification').html(data.compNo);
+                    $('#employeeNumber').html(data.empNo);
+                    $('#departmentNotification').html(data.deptNo);
+                    $('#adminNumber').html(data.admNo);
+                    let absentPer =
+                        `${parseInt((parseInt(data.absentNo)/parseInt(data.empNo))*100)}%`;
+                    let presentPer =
+                        `${100 - parseInt((parseInt(data.absentNo)/parseInt(data.empNo))*100)}%`;
+                    $('#absent').html(absentPer);
+                    $('#present').html(presentPer);
+                    document.getElementById("absent").style.width = absentPer;
+                    document.getElementById("present").style.width = presentPer;
+                    data.absentName.forEach(element => {
+                        $("#absentsNames").append(`
+                            <li class="w3-padding-16">
+                                <span class="w3-xlarge">${element}</span><br>
+                            </li>
+                    `);
+                    });
+                    data.complains.forEach(element => {
+                        $("#complainsLa").append(`
+                        <div class="w3-row w3-card w3-margin">
+                            <div class="w3-col m10 w3-container ">
+                                <h4>${element.title}</h4>
+                                <p>${element.desc}</p><br>
+                            </div>
+                        </div>
+                    `);
+                    });
+                },
+                error: function () {
+                    alert(status);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // $(document).ready(function () {
+        // Get the Sidebar
+        var mySidebar = document.getElementById("mySidebar");
+
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+
+        // Toggle between showing and hiding the sidebar, and add overlay effect
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+                overlayBg.style.display = "none";
+            } else {
+                mySidebar.style.display = 'block';
+                overlayBg.style.display = "block";
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+            overlayBg.style.display = "none";
+        }
+
+
+        // });
+        var ctx = document.getElementById('myChart').getContext('2d');
+        ctx.canvas.width = 300;
+        ctx.canvas.height = 300;
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: Larray,
+                // labels: ['Developer', 'Programmer', 'Manager', 'HR', 'Security'],
+                //data willbe added here later on 
+                datasets: [{
+                    label: 'Number of Employee',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(220, 99, 132)',
+                    data: [8, 5, 5, 5, 3]
+                    // data will be added later on
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    </script>
+
+</body>
+
+</html>

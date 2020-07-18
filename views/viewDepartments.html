@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Smart Attendace System</title>
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        body {
+            background-color: #f7ede2;
+            margin-top: 2em;
+        }
+
+        .myContainer {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2em;
+        }
+
+        .lol {
+            margin: 1em;
+        }
+
+        .lol:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="text-center">View All Departments</h3>
+    <div class="myContainer row justify-content-center" id="target">
+
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost/final_project/api/empoyee/department`,
+            dataType: 'json',
+            success: function (data, status) {
+                console.log(data[0][0]);
+                for (var i = 0; i < data.length; i++) {
+                    // $("#target").append(`
+                    let html = `
+                    <div class="card lol" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${data[i][0]}</h5>
+                        <ul class="list-group list-group-flush">
+                    </div>`;
+                    // );
+                    for(let j=1; j < data[i].length; j++){
+                        html+= `
+                        <li class="list-group-item text-center">${data[i][j]} </li>`
+                    }
+
+                    html += `</ul></div>`;
+                    $("#target").append(html);
+                }
+            },
+            error: function (xhr) {
+                alert(xhr);
+            }
+        });
+    });
+</script>

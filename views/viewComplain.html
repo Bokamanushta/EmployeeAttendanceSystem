@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Smart Attendace System</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        body {
+            background-color: #f7ede2;
+            margin-top: 2em;
+        }
+
+        .myContainer {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2em;
+        }
+
+        .lol {
+            margin: 1em;
+        }
+
+        .lol:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <h4 class="text-center">View All Complains</h4>
+    <br><br>
+    <div class="w3-container" id="complainsLa">
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost/final_project/api/complains`,
+            dataType: 'json',
+            success: function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#complainsLa").append(`
+                    <div class="w3-row w3 card w3-centered w3-margin w3-padding w3-animate-left">
+            <div class="w3-col m10 w3-container">
+                <h4>Title : ${data[i].title}</h4>
+                <br>
+                <p><span>ID : </span>${data[i].complainID}</p>
+                <p><span>Description : </span>${data[i].description}</p>
+                <p><span>Status : </span>${data[i].status}</p><br>
+                <a href="./editcomplain.html?id=${data[i].complainID}" class="btn row justify-content-center btn-warning">Look Up</a>
+            </div>
+        </div>
+                    `);
+                }
+            },
+            error: function () {
+                alert(status);
+            }
+        });
+    });
+</script>

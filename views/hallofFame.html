@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Smart Attendace System</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        body {
+            background-color: #f7ede2;
+            margin-top: 2em;
+        }
+
+        .myContainer {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2em;
+        }
+
+        .lol {
+            margin: 1em;
+        }
+
+        .lol:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <h4 class="text-center">Hall of Fames</h4>
+    <div class="myContainer row justify-content-center" id="target">
+        
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost/final_project/api/empoyee/halloffames`,
+            dataType: 'json',
+            success: function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#target").append(`
+                    <div class="card lol w3-animate-zoom" style="width: 18rem;">
+                    <img class="card-img-top" src="../files/pictures/medal.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">${data[i].name}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${data[i].employeeID} </li>
+                        <li class="list-group-item">Email : ${data[i].email} </li>
+                        <li class="list-group-item">Department : ${data[i].deptName}</li>
+                        <li class="list-group-item">Position : ${data[i].posName} </li>
+                    </ul>
+                    </div>
+                    `);
+                }
+            },
+            error: function () {
+                alert(status);
+            }
+        });
+    });
+</script>

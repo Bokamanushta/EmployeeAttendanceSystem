@@ -1,0 +1,113 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samrt Attendance System</title>
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        #myButtonSubmit {
+            width: 20vw;
+            margin-left: 1.2em;
+            margin-top: 1.2em;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        body {
+            background-color: #f7ede2;
+            margin-top: 5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="text-center">Add Complain Page</h3><br>
+    <div class="container">
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="id" class="col-sm-2 col-form-label"><b>ID</b></label>
+            <div class="col-sm-10">
+                <input type="text" name="id" class="form-control" id="id" disabled>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label"><b>Title</b></label>
+            <div class="col-sm-10">
+                <input type="title" name="id" class="form-control" id="title">
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label"><b>Description</b></label>
+            <div class="col-sm-10">
+                <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="form-group row">
+            <label for="status" class="col-sm-2 col-form-label"><b>Status</b></label>
+            <div class="col-sm-10">
+                <input type="text" name="status" class="form-control" id="status" value="Unsolved" disabled>
+            </div>
+        </div>
+        <!-- .**. -->
+        <div class="row justify-content-md-center">
+            <button id="myButtonSubmit" class="btn btn-success" type="submit">Report</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+        // generating ID
+        function generateAdminID() {
+            let date = new Date();
+            return `CM${Math.floor(Math.random() * (999 - 1) + 1)}N${date.getMilliseconds()}`;
+        }
+        let id = generateAdminID;
+        $('#id').val(id);
+
+        $('#myButtonSubmit').click(function () {
+            let formData = {
+                id: $('#id').val(),
+                title: $('#title').val(),
+                description: $('#description').val(),
+                status: $('#status').val()
+            };
+            console.log(formData);
+            if (formData) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/final_project/api/complains',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data, status) {
+                        console.log('Dhukse');
+                        if (data.status == "success") {
+                            // window.location.href = './dashboard.html';
+                            console.log('Successfull');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to connect');
+                    }
+                });
+            }
+        });
+    });
+</script>

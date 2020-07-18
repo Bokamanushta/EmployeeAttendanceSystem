@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Smart Attendace System</title>
+    <!-- Boostrap files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Boostrap files -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 5em auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="text-center">Sign Out Atendace</h3>
+        <form action="/action_page.php">
+            <label for="cardNo">Card No</label>
+            <input type="text" id="cardNo" name="cardNo" placeholder="Scan Your card here">
+        </form>
+    </div>
+</body>
+
+</html>
+
+<!-- Boostrap files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Boostrap files -->
+
+<!-- JQuery files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- JQuery files -->
+
+
+<script>
+    $(document).ready(function () {
+
+        let rfids = ['0004603774', '0004587802', '0004624889'];
+        // on input change
+        // $("#cardNo").change(function () {
+        //     if (cond) {
+        //         alert('You already Scanned');
+        //         $("#cardNo").val('');
+        //     } else {
+        //         let date = new Date();
+        //         console.log(date.getHours());
+        //         let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        //         console.log(time);
+        //         let tarik = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
+        //         console.log(tarik);
+        //         if (date.getHours() <= 10) {
+        //             console.log('Good');
+        //             let formData = {
+        //                 rfid: $("#cardNo").val(),
+        //                 date: tarik,
+        //                 time: time
+        //             };
+        //             $.ajax({
+        //                 type: 'POST',
+        //                 url: 'http://localhost/final_project/api/attendace/timeout',
+        //                 data: formData,
+        //                 dataType: 'json',
+        //                 success: function (data, status) {
+        //                     console.log('Dhukse');
+        //                     if (data.status == "success") {
+        //                         rfids.push($("#cardNo").val());
+        //                         $("#cardNo").val('');
+        //                         console.log('Successfull');
+        //                     } else {
+        //                         $("#cardNo").val('');
+        //                         alert('unSuccessfull');
+        //                     }
+        //                 },
+        //                 error: function () {
+        //                     $("#cardNo").val('');
+        //                     alert('Invalid Card');
+        //                 }
+        //             });
+        //         }
+        //     }
+        // });
+
+
+        let date = new Date();
+        if (date.getHours() >= 9) {
+            const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+                "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+            ];
+            let tarik = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
+            let formData = {
+                rfid: rfids,
+                date: tarik,
+                month: 'JAN'
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost/final_project/api/attendace/absent',
+                data: formData,
+                dataType: 'json',
+                success: function (data, status) {
+                    console.log('Dhukse');
+                    if (data.status == "success") {
+                        console.log('Successfull');
+                    } else {
+                        console.log('unSuccessfull');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    console.log(error.responseText);
+                }
+            });
+        }
+    });
+</script>
